@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
-import Radium from 'radium'
+import styles from './app.module.css';
+//import Radium, { StyleRoot } from 'radium'
 import Person from './components/Person/Person'
 
 
@@ -64,29 +64,51 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      // ':hover': {
+      //   backgroundColor: 'lightgreen',
+      //   color: 'black'
+      // }
     }
 
     // let classes = ['red', 'bold'].join(' ')
 
+
     let classes = []
 
-    persons.length < 3 ? classes.push('red') : ''
-    persons.length <= 1 ? classes.push('bold') : ''
+    if (persons.length < 3) {
+      classes.push(styles.red)
+    }
+
+    if (persons.length <= 1) {
+      classes.push(styles.bold)
+    }
 
     return (
-      <div className="App">
+      // <StyleRoot>
+      <div className={styles.App}>
         <h1>I'm a React App</h1>
         <p className={classes.join(' ')}>this is tworking</p>
-        <button style={style} onClick={this.toggleShow}>Show Names</button>
+        <button onClick={this.toggleShow}>Show Names</button>
         <div>{showPersons ? (style.backgroundColor = 'red', persons.map((person, index) => <Person key={index} change={this.changeName} delete={() => this.deleteName(index)} name={person.name} age={person.age}>{index}</Person>)) : ''}</div>
       </div>
+
     );
   }
 }
 
 
-export default Radium(App)
+export default App
+
+
+//Radium In-line
+
+// style[':hover'] = {
+//   backgroundColor: 'salmon',
+//   color: 'black'
+// }
+
+
 
 // Hooks example
 
